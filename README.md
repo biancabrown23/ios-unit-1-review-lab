@@ -129,6 +129,54 @@ b. Write a function that takes in an array of `Receipts` and returns an array of
 
 c. Write a function that takes in an array of `Receipts` and returns an array of those receipts sorted by price
 
+struct Receipt {
+let storeName: String
+let items: [ReceiptItem]
+
+func totalCost() -> Double {
+var priceArr = [Double]()
+for item in items {
+priceArr.append(item.price)
+}
+
+return priceArr.reduce(0, +)
+
+}
+}
+​
+​struct ReceiptItem {
+​let name: String
+​let price: Double
+​}
+​
+​func sameNames(receipt: [Receipt], storeName: String) -> [Receipt]  {
+​var returnArray =  receipt.filter { ($0.storeName == storeName)
+​//        return receipt.storeName == storeName
+​}
+​return returnArray
+​}
+​
+​func sortedByPrice(ticket: [Receipt]) -> [Receipt] {
+​var sortedPrice = ticket.sorted { $0.totalCost() < $1.totalCost()
+​//        (ticket1, ticket2) -> Bool in
+​//        return ticket1.totalCost() < ticket2.totalCost()
+​}
+​return sortedPrice
+​}
+​
+​
+​
+​let apple = ReceiptItem(name: "Apple", price: 2.00)
+​let cereal = ReceiptItem(name: "Captain Crunch", price: 4.00)
+​let soda = ReceiptItem(name: "Coke", price: 2.50)
+​let itemsArr = [apple, cereal, soda]
+​
+​
+​let recipet = Receipt(storeName: "Whole foods", items: itemsArr)
+​
+​print(recipet.totalCost())
+
+
 ## Question 6
 
 a. The code below doesn't compile.  Why?  Fix it so that it does compile.
@@ -160,6 +208,13 @@ let edgar = Giant(name: "Edgar", weight: 520.0, homePlanet: "Earth")
 let jason = edgar
 jason.name = "Jason"
 ```
+
+let edgar = Giant(name: "Edgar", weight: 520.0, homePlanet: "Earth")
+let jason = edgar
+jason.name = "Jason"
+
+
+// it will return "Jason" due to this being a class and with classes they are reference types which means that whatever the original value is, it will be updated with the new one. 
 
 ## Question 7
 
@@ -233,6 +288,8 @@ library1.add(track: "Voodoo Child")
 let library2 = library
 library2.add(track: "Come As You Are")
 ```
+
+// The contents of both 'library1' and 'library2' are ( "Michelle", "Voodoo Child", "Come As You Are"). Why this is the case is because we have a class and since class is a reference type, the original value is overwritten but still stored within memory while the new one is returned or printed. 
 
 ## Question 10
 
